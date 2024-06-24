@@ -124,19 +124,5 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    // 'providers' => [
-        
-    //     Intervention\Image\Image::class,
-    //     Intervention\Image\ImageManager::class,
-
-    // ],
-
-    
-    // 'aliases' => [
-
-    //     'Image' => Intervention\Image\Image::class,
-
-    // ],
-
 
 ];

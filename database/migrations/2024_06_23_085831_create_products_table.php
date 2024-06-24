@@ -23,7 +23,6 @@ return new class extends Migration
             $table->decimal('current_purchase_cost', 11, 3);
             $table->decimal('current_sale_price', 11, 3)->nullable();
             $table->decimal('available_quantity', 11, 3)->default(0);
-            $table->tinyInteger('discount_type')->default(0)->comment('fixed=0,percentage=1')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('is_popular')->nullable()->comment('0=no,1=yes');
             $table->tinyInteger('is_trending')->nullable()->comment('0=no,1=yes');

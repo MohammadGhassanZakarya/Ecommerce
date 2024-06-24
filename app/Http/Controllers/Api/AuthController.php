@@ -12,7 +12,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    
     function login(Request $request) {
 
         $validator = Validator::make($request->all(),[
@@ -45,8 +44,11 @@ class AuthController extends Controller
         return response()->json(auth('api')->user());
     }
 
-
     function logout() {
+        $tokenOld = JWTAuth::getToken();        
+        // invalidate token
+        $invalidate = JWTAuth::invalidate($tokenOld);
+
         auth('api')->logout();
         return response()->json(['error'=> false, 'message' => 'logout successfuly'],200);
     }
@@ -117,6 +119,21 @@ class AuthController extends Controller
             'expire_in' =>auth('api')->factory()->getTTL()*3600,
         ]);
     }
+
+    public function changePassword(Request $request){
+
+        $hasPass=  Hash::make($request->newPass);
+        $checkCurrentPass=Hash::check($request->currentPass, auth('api')->user()->password);
+        if(!$checkCurrentPass){
+            return response()->json(['error'=> true, 'message' => 'The current password is incorrect'],200);
+        }
+        else
+        {
+            User::where('email',auth('api')->user()->email)->update(['password'=>$hasPass]);
+            return response()->json(['error'=> false, 'message' => 'Password Successfully Changed'],200);
+        }
+    }
+
     
 
 }

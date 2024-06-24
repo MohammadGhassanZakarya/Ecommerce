@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('slug');
             $table->bigInteger('category_id');
             $table->bigInteger('user_id');
-            $table->string('image_path')->nullable();
             $table->string('code')->nullable();
             $table->string('brand')->nullable();
             $table->decimal('current_purchase_cost', 11, 3);
